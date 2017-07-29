@@ -4,8 +4,8 @@
 
 Start your Amazon Web Services EC2 Instance with Python 3:
 
-    python3 start_stop_ec2.py start
-    python3 start_stop_ec2.py stop
+    python3 start_stop_ec2.py --o start
+    python3 start_stop_ec2.py --o stop
 
 ## Requirements
 
