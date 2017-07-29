@@ -2,7 +2,10 @@
 
 ## About
 
-Start your Amazon Web Services EC2 Instance with Python 3.
+Start your Amazon Web Services EC2 Instance with Python 3:
+
+    python3 start_stop_ec2.py start
+    python3 start_stop_ec2.py stop
 
 ## Requirements
 
@@ -50,3 +53,9 @@ After you've installed the AWS CLI open the PowerShell (Windows) or a Shell (UNI
 ## Changelog
 
 Empty for now, but this might change in the future.
+
+## References
+
+* [AWS Python Developer center](https://aws.amazon.com/python/)
+* [EC2 API Reference](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html)
+* [Boto3 Documentation](https://boto3.readthedocs.io/en/latest/guide/quickstart.html)

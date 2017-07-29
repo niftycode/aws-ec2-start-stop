@@ -1,12 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
 start_stop_ec2.py
 Python 3.6
-version: 1.0
+version: 1.1
 author: Bodo Schonfeld
-last edited: 28/07/2017
+last edited: 29/07/2017
 """
 
 import sys
@@ -40,7 +40,9 @@ def evaluate(args):
     elif operation == "stop":
         stop_ec2()
     else:
+        print("")
         print("You can >start< or >stop< your EC2 instance.")
+        print("")
 
 # Start the instance
 def start_ec2():
