@@ -52,7 +52,7 @@ After you've installed the AWS CLI open the PowerShell (Windows) or a Shell (UNI
 
 ## Changelog
 
-Empty for now, but this might change in the future.
+* 30/07/2017 - Receiving public IPv4 address
 
 ## References
 

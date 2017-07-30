@@ -62,7 +62,7 @@ def start_ec2():
 
     # Dry run succeeded, run start_instances without dryrun
     try:
-        response = ec2.start_instances(InstanceIds=[Mem.instance_id],  DryRun=False)
+        response = ec2.start_instances(InstanceIds=[Mem.instance_id], DryRun=False)
         print(response)
         fetch_public_ip()
     except ClientError as e:
