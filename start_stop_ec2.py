@@ -4,13 +4,13 @@
 """
 start_stop_ec2.py
 Python 3.6
-version: 1.1
+version: 1.2
 author: Bodo Schonfeld
-last edited: 29/07/2017
+last edited: 30/07/2017
 """
 
 import sys
-import os
+import time
 import argparse
 import boto3.ec2
 from botocore.exceptions import ClientError
@@ -36,8 +36,10 @@ def readCredentials():
 def evaluate(args):
     operation = args.o
     if operation == "start":
+        print("")
         start_ec2()
     elif operation == "stop":
+        print("")
         stop_ec2()
     else:
         print("")
@@ -58,6 +60,7 @@ def start_ec2():
     try:
         response = ec2.start_instances(InstanceIds=[Mem.instance_id], DryRun=False)
         print(response)
+        fetch_public_ip()
     except ClientError as e:
         print(e)
 
@@ -85,6 +88,21 @@ def parseArguments():
                         help='You can >start< or >stop< your EC2 instance.')
     args = parser.parse_args()
     sys.stdout.write(str(evaluate(args)))
+
+# Fetch the public IPv4 address of the ec2 instance
+def fetch_public_ip():
+    print("")
+    print("Waiting for public IPv4 address...")
+    print("")
+    time.sleep(16)
+    response = ec2.describe_instances()
+    first_array = response["Reservations"]
+    first_index = first_array[0]
+    instances_dict = first_index["Instances"]
+    instances_array = instances_dict[0]
+    ip_address = instances_array["PublicIpAddress"]
+    print("")
+    print("Public IPv4 address of the EC2 instance: {0}".format(ip_address))
 
 def main():
     credentials = readCredentials()
