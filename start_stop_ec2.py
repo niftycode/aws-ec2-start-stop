@@ -28,11 +28,12 @@ class Mem:
 # Read credentials from credentials.txt
 def readCredentials():
     try:
-        with open('credentials.txt', 'r') as f:
+        with open('/Users/bodo/credentials.txt', 'r') as f:
             credentials = [line.strip() for line in f]
             return credentials
-    except FileNotFoundError:
-        return None
+    except FileNotFoundError as e:
+        print("Error Message: {0}".format(e))
+        # return None
 
 
 # Evaluate the arguments
