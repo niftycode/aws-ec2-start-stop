@@ -46,7 +46,7 @@ Instead of creating the *.aws* folder manually you can use the [AWS Command Line
 * [Installer for Windows](https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html#install-msi-on-windows)
 * [Installer for Linux, macOS, UNIX](https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-bundle.html)
 
-After you've installed the AWS CLI open the PowerShell (Windows) or a Shell (UNIX-like systems) and enter:
+After you've installed the AWS CLI open the PowerShell (or the Command Prompt) in Windows. In UNIX-like systems open a Shell. Then enter the following command:
 
     aws configure
 

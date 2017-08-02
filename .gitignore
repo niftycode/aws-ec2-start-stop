@@ -1,2 +1,5 @@
 .DS_Store
 /.vscode
+/.cache
+/__pycache__/test_ec2.cpython-36-PYTEST.pyc
+/__pycache__/start_stop_ec2.cpython-36.pyc
