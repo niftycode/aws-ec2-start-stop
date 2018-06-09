@@ -21,7 +21,7 @@ or
 
 ### EC2 Instance ID
 
-Enter your EC2 ID in the *credentials.txt* file. Check your EC2 dashboard for the available IDs.
+Enter your **EC2 ID** in the *credentials.txt* file. Check your EC2 dashboard for the available IDs.
 
 ### AWS Credentials
 
@@ -50,12 +50,24 @@ After you've installed the AWS CLI open the PowerShell (or the Command Prompt) i
 
     aws configure
 
+Enter your 
+
+* aws access key,
+* aws secret key id and
+* your aws region.
+
+### Set the path to yout home folder
+
+The path to the "credentials.txt" is hard coded in the `readCredentials()` function. So change this to your home folder path.
+
 ## Changelog
 
 * 30/07/2017 - Receiving public IPv4 address
+* 10/06/2018 - Added more print statements.
 
 ## References
 
 * [AWS Python Developer center](https://aws.amazon.com/python/)
 * [EC2 API Reference](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html)
 * [Boto3 Documentation](https://boto3.readthedocs.io/en/latest/guide/quickstart.html)
+* [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
