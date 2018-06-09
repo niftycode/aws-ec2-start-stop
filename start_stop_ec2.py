@@ -4,9 +4,9 @@
 """
 start_stop_ec2.py
 Python 3.6
-version: 1.2
+version: 1.3
 author: Bodo Schonfeld
-last edited: 30/07/2017
+last edited date: 10/06/2018
 """
 
 import sys
@@ -55,7 +55,13 @@ def evaluate(args):
 def start_ec2():
     # This code is from Amazon's EC2 example
     # Do a dryrun first to verify permissions
+
+    print("------------------------------")
+    print("Try to start the EC2 instance.")
+    print("------------------------------")
+
     try:
+        print("Start dry run...")
         ec2.start_instances(InstanceIds=[Mem.instance_id], DryRun=True)
     except ClientError as e:
         if 'DryRunOperation' not in str(e):
@@ -63,6 +69,7 @@ def start_ec2():
 
     # Dry run succeeded, run start_instances without dryrun
     try:
+        print("Start instance without dry run...")
         response = ec2.start_instances(InstanceIds=[Mem.instance_id], DryRun=False)
         print(response)
         fetch_public_ip()
@@ -74,6 +81,7 @@ def start_ec2():
 def stop_ec2():
     # This code is from Amazon's EC2 example
     # Do a dryrun first to verify permissions
+
     try:
         ec2.stop_instances(InstanceIds=[Mem.instance_id], DryRun=True)
     except ClientError as e:
