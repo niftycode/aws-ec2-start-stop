@@ -4,12 +4,13 @@
 """
 start_stop_ec2.py
 Python 3.6
-version: 1.3
+version: 1.4
 author: Bodo Schonfeld
 last edited date: 10/06/2018
 """
 
 import sys
+import os
 import time
 import argparse
 import boto3.ec2
@@ -27,8 +28,10 @@ class Mem:
 
 # Read credentials from credentials.txt
 def readCredentials():
+    home_dir = os.path.expanduser('~')
+    credentials_file_path = os.path.join(home_dir, "instance_id.txt")
     try:
-        with open('/Users/bodo/credentials.txt', 'r') as f:
+        with open(credentials_file_path, 'r') as f:
             credentials = [line.strip() for line in f]
             return credentials
     except FileNotFoundError as e:
@@ -81,6 +84,10 @@ def start_ec2():
 def stop_ec2():
     # This code is from Amazon's EC2 example
     # Do a dryrun first to verify permissions
+
+    print("------------------------------")
+    print("Try to stop the EC2 instance.")
+    print("------------------------------")
 
     try:
         ec2.stop_instances(InstanceIds=[Mem.instance_id], DryRun=True)

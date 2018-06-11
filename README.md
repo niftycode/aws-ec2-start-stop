@@ -21,7 +21,13 @@ or
 
 ### EC2 Instance ID
 
-Enter your **EC2 ID** in the *credentials.txt* file. Check your EC2 dashboard for the available IDs.
+Enter your **EC2 ID** in a file with the name *instance_id.txt* and save this file in your home folder:
+
+	/Users/[username]/instance_id.txt // Windows
+	/Users/[username]/instance_id.txt // macOS
+	/home/[username]/instance_id.txt // Linux
+
+ Check your EC2 dashboard for the available IDs.
 
 ### AWS Credentials
 
@@ -53,17 +59,13 @@ After you've installed the AWS CLI open the PowerShell (or the Command Prompt) i
 Enter your 
 
 * aws access key,
-* aws secret key id and
+* your aws secret key id and
 * your aws region.
-
-### Set the path to yout home folder
-
-The path to the "credentials.txt" is hard coded in the `readCredentials()` function. So change this to your home folder path.
 
 ## Changelog
 
 * 30/07/2017 - Receiving public IPv4 address
-* 10/06/2018 - Added more print statements.
+* 10/06/2018 - Added more print statements and updated `readCredentials()`. The path to your "instance_id.txt" is no longer hard coded.
 
 ## References
 
