@@ -3,11 +3,12 @@
 
 """
 start_stop_ec2.py
-Python 3.6
-version: 1.4
+Python 3.7
+version: 1.5.0
 author: Bodo Schonfeld
-last edited date: 10/06/2018
+last edited date: 29/11/2018
 """
+
 
 import sys
 import os
@@ -16,7 +17,7 @@ import argparse
 import boto3.ec2
 from botocore.exceptions import ClientError
 
-
+VERSION = '1.5.0'
 ec2 = boto3.client('ec2')
 
 
@@ -36,22 +37,23 @@ def readCredentials():
             return credentials
     except FileNotFoundError as e:
         print("Error Message: {0}".format(e))
-        # return None
 
 
 # Evaluate the arguments
 def evaluate(args):
-    operation = args.o
-    if operation == "start":
-        print("")
+    """
+    Evaluate the given arguments.
+    :param args: User's input
+    """
+    if args.up:
         start_ec2()
-    elif operation == "stop":
-        print("")
+    elif args.down:
         stop_ec2()
+    elif args.version:
+        print()
+        print('This is version {0}.'.format(VERSION))
     else:
-        print("")
-        print("You can >start< or >stop< your EC2 instance.")
-        print("")
+        print("Missing argument! Type '-h' for available arguments.")
 
 
 # Start the instance
@@ -103,20 +105,29 @@ def stop_ec2():
         print(e)
 
 
-# Parse input arguments (start / stop)
+# Parse input arguments (up / down / version)
 def parseArguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--o', type=str, default="nothing",
-                        help='You can >start< or >stop< your EC2 instance.')
+    """
+    The options the user can choose (up, down, version)
+    :return: The chosen option.
+    """
+    parser = argparse.ArgumentParser("start_stop_ec2.py: \
+    Start and stop your EC2 instance.\n")
+    parser.add_argument(
+        '-u', '--up', help="Start the EC2 instance", action='store_true')
+    parser.add_argument('-d', '--down',
+                        help="Stop the EC2 instance", action='store_true')
+    parser.add_argument(
+        '-v', '--version', help="Display the current version", action='store_true')
     args = parser.parse_args()
-    sys.stdout.write(str(evaluate(args)))
+    return args
 
 
 # Fetch the public IPv4 address of the ec2 instance
 def fetch_public_ip():
-    print("")
+    print()
     print("Waiting for public IPv4 address...")
-    print("")
+    print()
     time.sleep(16)
     response = ec2.describe_instances()
     first_array = response["Reservations"]
@@ -124,15 +135,19 @@ def fetch_public_ip():
     instances_dict = first_index["Instances"]
     instances_array = instances_dict[0]
     ip_address = instances_array["PublicIpAddress"]
-    print("")
+    print()
     print("Public IPv4 address of the EC2 instance: {0}".format(ip_address))
 
 
 def main():
+    """
+    The entry point of this program.
+    """
     credentials = readCredentials()
     Mem.instance_id = credentials[0]
-    parseArguments()
-    print("")
+    args = parseArguments()
+    sys.stdout.write(str(evaluate(args)))
+    print()
 
 
 if __name__ == '__main__':
