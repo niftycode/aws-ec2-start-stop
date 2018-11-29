@@ -4,8 +4,11 @@
 
 Start your Amazon Web Services EC2 Instance with Python 3:
 
-    python3 start_stop_ec2.py --o start
-    python3 start_stop_ec2.py --o stop
+    # Start EC2 instance
+    python3 start_stop_ec2.py -u
+    
+    # Stop EC2 instance
+    python3 start_stop_ec2.py -d
 
 ## Requirements
 
@@ -66,6 +69,7 @@ Enter your
 
 * 30/07/2017 - Receiving public IPv4 address
 * 10/06/2018 - Added more print statements and updated `readCredentials()`. The path to your "instance_id.txt" is no longer hard coded.
+* 29/11/2018 - Updated `parseArguments()` and added more comments
 
 ## References
 
