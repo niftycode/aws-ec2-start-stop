@@ -68,8 +68,8 @@ Enter your
 ## Changelog
 
 * 30/07/2017 - Receiving public IPv4 address
-* 10/06/2018 - Added more print statements and updated `readCredentials()`. The path to your "instance_id.txt" is no longer hard coded.
-* 29/11/2018 - Updated `parseArguments()` and added more comments
+* 10/06/2018 - Added more print statements and updated `read_credentials()`. The path to your "instance_id.txt" is no longer hard coded.
+* 29/11/2018 - Updated `parse_arguments()` and added more comments
 
 ## References
 

@@ -5,8 +5,8 @@
 start_stop_ec2.py
 Python 3.7
 version: 1.5.0
-author: Bodo Schonfeld
-last edited date: 29/11/2018
+author: Bodo Schönfeld
+last edited date: 30/11/2018
 """
 
 
@@ -21,14 +21,20 @@ VERSION = '1.5.0'
 ec2 = boto3.client('ec2')
 
 
-# Global Class Pattern
 class Mem:
-    # Declare globals here...
+    """
+    Global Class Pattern:
+    Declare globals here.
+    """
     instance_id = ""
 
 
-# Read credentials from credentials.txt
-def readCredentials():
+def read_credentials():
+    """
+    Read the user's credential file 'instance_id.txt'.
+    This file should be located in the user's home folder.
+    :return: The EC2 instance id.
+    """
     home_dir = os.path.expanduser('~')
     credentials_file_path = os.path.join(home_dir, "instance_id.txt")
     try:
@@ -39,11 +45,27 @@ def readCredentials():
         print("Error Message: {0}".format(e))
 
 
-# Evaluate the arguments
+def parse_arguments():
+    """
+    The options the user can choose (up, down, version)
+    :return: The chosen option.
+    """
+    parser = argparse.ArgumentParser("start_stop_ec2.py: \
+    Start and stop your EC2 instance.\n")
+    parser.add_argument(
+        '-u', '--up', help="Start the EC2 instance", action='store_true')
+    parser.add_argument('-d', '--down',
+                        help="Stop the EC2 instance", action='store_true')
+    parser.add_argument(
+        '-v', '--version', help="Display the current version", action='store_true')
+    args = parser.parse_args()
+    return args
+
+
 def evaluate(args):
     """
     Evaluate the given arguments.
-    :param args: User's input
+    :param args: The user's input.
     """
     if args.up:
         start_ec2()
@@ -56,11 +78,12 @@ def evaluate(args):
         print("Missing argument! Type '-h' for available arguments.")
 
 
-# Start the instance
 def start_ec2():
-    # This code is from Amazon's EC2 example
-    # Do a dryrun first to verify permissions
-
+    """
+    This code is from Amazon's EC2 example.
+    Do a dryrun first to verify permissions.
+    Try to start the EC2 instance.
+    """
     print("------------------------------")
     print("Try to start the EC2 instance.")
     print("------------------------------")
@@ -82,11 +105,12 @@ def start_ec2():
         print(e)
 
 
-# Stop the instance
 def stop_ec2():
-    # This code is from Amazon's EC2 example
-    # Do a dryrun first to verify permissions
-
+    """
+    This code is from Amazon's EC2 example.
+    Do a dryrun first to verify permissions.
+    Try to stop the EC2 instance.
+    """
     print("------------------------------")
     print("Try to stop the EC2 instance.")
     print("------------------------------")
@@ -97,7 +121,7 @@ def stop_ec2():
         if 'DryRunOperation' not in str(e):
             raise
 
-    # Dry run succeeded, call stop_instances witout dryrun
+    # Dry run succeeded, call stop_instances without dryrun
     try:
         response = ec2.stop_instances(InstanceIds=[Mem.instance_id], DryRun=False)
         print(response)
@@ -105,26 +129,11 @@ def stop_ec2():
         print(e)
 
 
-# Parse input arguments (up / down / version)
-def parseArguments():
-    """
-    The options the user can choose (up, down, version)
-    :return: The chosen option.
-    """
-    parser = argparse.ArgumentParser("start_stop_ec2.py: \
-    Start and stop your EC2 instance.\n")
-    parser.add_argument(
-        '-u', '--up', help="Start the EC2 instance", action='store_true')
-    parser.add_argument('-d', '--down',
-                        help="Stop the EC2 instance", action='store_true')
-    parser.add_argument(
-        '-v', '--version', help="Display the current version", action='store_true')
-    args = parser.parse_args()
-    return args
-
-
-# Fetch the public IPv4 address of the ec2 instance
 def fetch_public_ip():
+    """
+    Fetch the public IP that has been assigned to the EC2 instance.
+    :return: Print the public IP to the console.
+    """
     print()
     print("Waiting for public IPv4 address...")
     print()
@@ -143,9 +152,9 @@ def main():
     """
     The entry point of this program.
     """
-    credentials = readCredentials()
+    credentials = read_credentials()
     Mem.instance_id = credentials[0]
-    args = parseArguments()
+    args = parse_arguments()
     sys.stdout.write(str(evaluate(args)))
     print()
 
