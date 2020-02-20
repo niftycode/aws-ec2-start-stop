@@ -24,11 +24,11 @@ or
 
 ### EC2 Instance ID
 
-Enter your **EC2 ID** in a file with the name *instance_id.txt* and save this file in your home folder:
+Enter your **EC2 ID** in a file with the name *instance_id.txt* and save this file in your Users/home folder:
 
-	/Users/[username]/instance_id.txt // Windows
-	/Users/[username]/instance_id.txt // macOS
-	/home/[username]/instance_id.txt // Linux
+    /Users/[username]/instance_id.txt // Windows
+    /Users/[username]/instance_id.txt // macOS
+    /home/[username]/instance_id.txt // Linux
 
  Check your EC2 dashboard for the available IDs.
 
@@ -55,15 +55,16 @@ Instead of creating the *.aws* folder manually you can use the [AWS Command Line
 * [Installer for Windows](https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html#install-msi-on-windows)
 * [Installer for Linux, macOS, UNIX](https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-bundle.html)
 
-After you've installed the AWS CLI open the PowerShell (or the Command Prompt) in Windows. In UNIX-like systems open a Shell. Then enter the following command:
+After you've installed the AWS CLI open the PowerShell (or the Command Prompt) in Windows. In UNIX-like systems open a Shell. Then run the following command:
 
     aws configure
 
-Enter your 
+Enter
 
-* aws access key,
-* your aws secret key id and
-* your aws region.
+* your AWS Access Key ID and
+* your AWS Secret Access Key.
+* As default region name enter your Availability Zone (AZ) and
+* use "json" as default output format.
 
 ## Changelog
 
